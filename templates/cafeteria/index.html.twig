@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% from 'cafeteria/macros.html.twig' import list %}
+{% import 'Macros/buttons.html.twig' as buttons %}
+
+{% block title %}Espaços de Café{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h1>Listagem de Espaços de Café</h1>
+        <div class="float-right">
+            {{ buttons.show(path('index'), 'Voltar') }}
+            {{ buttons.create(path('cafeteria_create'), 'Cadastrar') }}
+        </div>
+        <br />
+        <div style="margin-top: 30px;">
+            {{ list(entities) }}
+        </div>
+    </div>
+{% endblock %}

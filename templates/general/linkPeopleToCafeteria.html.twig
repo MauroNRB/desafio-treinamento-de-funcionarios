@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% import 'Macros/alerts.html.twig' as alerts %}
+{% import 'Macros/buttons.html.twig' as buttons %}
+{% from 'general/macros.html.twig' import javascriptLink %}
+
+{% block title %}Vincular pessoa ao espaço de café{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        #list-group {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.375rem; /* Bordas arredondadas */
+        }
+
+        .item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .btn-select {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <br>
+    <div id="alert-ajax"></div>
+
+    <script>
+        var arrEntity1 = {{ peoples|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw  }};
+        var arrEntity2 = {{ cafeterias|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw  }};
+    </script>
+
+    <div class="container">
+        <br>
+        <h1>Vincular pessoa ao espaço de café</h1>
+        <div class="float-right">
+            {{ buttons.show(path('index'), 'Voltar') }}
+        </div>
+        <br />
+        <div style="margin-top: 30px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 entitySelect1">
+                        <input type="text" class="form-control" id="input-entity1" placeholder="Filtrar por nomes das pessoas">
+                        <div id="results-entity1" class="list-group mt-3"></div>
+                    </div>
+                    <div class="col-md-6 entitySelect2">
+                        <input type="text" class="form-control" id="input-entity2" placeholder="Filtrar por nome das cafeterias">
+                        <div id="results-entity2" class="list-group mt-3"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <form id="link-entities" action="{{ path('general_link_people_to_cafeteria') }}" method="POST">
+                        <div class="form-actions form-row text-center">
+                            <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> {{ 'Vincular'|trans }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ javascriptLink('fullName', 'people', 'name', 'cafeteria') }}
+{% endblock %}

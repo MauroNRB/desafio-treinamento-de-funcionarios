@@ -1,0 +1,6 @@
+frontend:
+    resource: "frontend/main.yaml"
+
+api:
+    prefix: /api
+    resource: "api/main.yaml"

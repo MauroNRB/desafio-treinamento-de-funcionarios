@@ -1,0 +1,20 @@
+index:
+    path: /
+    controller: App\Controller\MainController::indexAction
+
+people:
+    prefix: /peoples
+    resource: "people.yaml"
+
+room:
+    prefix: /rooms
+    resource: "room.yaml"
+
+cafeteria:
+    prefix: /cafeterias
+    resource: "cafeteria.yaml"
+
+coaching:
+    prefix: /general
+    resource: "general.yaml"
+

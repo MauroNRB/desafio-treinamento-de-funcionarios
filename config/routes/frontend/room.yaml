@@ -1,0 +1,19 @@
+room_list:
+    path: /
+    methods: [GET]
+    controller: App\Controller\RoomController::indexAction
+
+room_create:
+    path: /new
+    methods: [GET, POST]
+    controller: App\Controller\RoomController::createAction
+
+room_update:
+    path: /edit/{id}
+    methods: [ GET, PUT ]
+    controller: App\Controller\RoomController::updateAction
+
+room_delete:
+    path: /{id}
+    methods: [ DELETE ]
+    controller: App\Controller\RoomController::deleteAction

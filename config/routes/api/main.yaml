@@ -1,0 +1,15 @@
+api_people:
+    prefix: /peoples
+    resource: "people.yaml"
+
+api_room:
+    prefix: /rooms
+    resource: "room.yaml"
+
+api_cafeteria:
+    prefix: /cafeterias
+    resource: "cafeteria.yaml"
+
+api_coaching:
+    prefix: /coachings
+    resource: "coaching.yaml"

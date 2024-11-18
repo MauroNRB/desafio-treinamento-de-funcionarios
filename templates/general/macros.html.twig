@@ -1,0 +1,122 @@
+{% macro javascriptLink(field1, entity1, field2 = '' , entity2 = '', custom = false) %}
+    <script>
+        let entitySelect1 = null;
+        var entitySelect2 = null;
+
+        function list(classMain, input, div, results, field, setSelect, custom=false)
+        {
+            var itemSelect = null;
+
+            function normalizeString(str) {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            }
+
+            function filtrarResultados() {
+                const term = normalizeString(input.value.toLowerCase());
+                const resultsFilter = results.filter(item => normalizeString(item[field].toLowerCase()).includes(term));
+
+                div.innerHTML = '';
+                if (resultsFilter.length > 0) {
+                    insertItems(resultsFilter);
+                } else if (term == '') {
+                    reset();
+                } else {
+                    const divItem = document.createElement('div');
+                    divItem.classList.add('list-group-item', 'text-muted');
+                    divItem.textContent = 'Nenhum resultado encontrado';
+                    div.appendChild(divItem);
+                }
+            }
+
+            function insertItems(resultsFilter) {
+                resultsFilter.forEach(item => {
+                    const divItem = document.createElement('div');
+                    divItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'item');
+                    divItem.textContent = item[field];
+
+                    // Botão para marcar o item como selecionado
+                    const btn = document.createElement('button');
+                    btn.classList.add('btn', 'btn-sm', 'btn-outline-primary', 'btn-selectable');
+                    btn.textContent = 'Selecionar';
+                    btn.onclick = () => selectItem(item, btn);
+
+                    divItem.appendChild(btn);
+                    div.appendChild(divItem);
+                });
+            }
+
+            function selectItem(item, btn) {
+                if (itemSelect !== null) {
+                    $('.' + classMain + " .btn-selectable").removeClass("btn-select");
+                }
+
+                if (itemSelect !== item.id) {
+                    itemSelect = item.id;
+                    btn.classList.add('btn-select');
+                    btn.textContent = 'Selecionado';
+                } else {
+                    itemSelect = null;
+                    btn.classList.remove('btn-select');
+                    btn.textContent = 'Selecionar';
+                }
+
+                setSelect(itemSelect);
+            }
+
+            function reset() {
+                div.innerHTML = '';
+
+                if (custom === false) {
+                    const resultsFilter = results.filter(item => normalizeString(item[field].toLowerCase()).includes(''));
+                    insertItems(resultsFilter);
+                } else {
+                    insertItems(results);
+                }
+            }
+
+            reset();
+            if (custom === false) {
+                input.addEventListener('input', filtrarResultados);
+            }
+        }
+
+        function setEntitySelect1(itemSelect)
+        {
+            entitySelect1 = itemSelect;
+        }
+
+        function setEntitySelect2(itemSelect)
+        {
+            entitySelect2 = itemSelect;
+        }
+
+        list('entitySelect1', document.getElementById('input-entity1'), document.getElementById('results-entity1'), arrEntity1, '{{ field1 }}', setEntitySelect1, false);
+
+        {% if not custom %}
+        list('entitySelect2', document.getElementById('input-entity2'), document.getElementById('results-entity2'), arrEntity2, '{{ field2 }}', setEntitySelect2);
+        {% else %}
+        list('entitySelect2', document.getElementById('input-entity2'), document.getElementById('results-entity2'), arrEntity2, '{{ field2 }}', setEntitySelect2, true);
+        {% endif %}
+
+
+        $("#link-entities").submit(function(e) {
+            e.preventDefault();
+
+            var data = {
+                {{ entity1 }}: entitySelect1,
+                {{ entity2 }}: entitySelect2
+            }
+
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (response) {
+                    $('#alert-ajax').html(response.msg);
+                },
+                data: JSON.stringify(data)
+            });
+        });
+    </script>
+{% endmacro %}

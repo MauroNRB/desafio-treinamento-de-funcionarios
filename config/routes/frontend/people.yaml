@@ -1,0 +1,19 @@
+people_list:
+    path: /
+    methods: [GET]
+    controller: App\Controller\PeopleController::indexAction
+
+people_create:
+    path: /new
+    methods: [GET, POST]
+    controller: App\Controller\PeopleController::createAction
+
+people_update:
+    path: /edit/{id}
+    methods: [GET, PUT]
+    controller: App\Controller\PeopleController::updateAction
+
+people_delete:
+    path: /{id}
+    methods: [DELETE]
+    controller: App\Controller\PeopleController::deleteAction

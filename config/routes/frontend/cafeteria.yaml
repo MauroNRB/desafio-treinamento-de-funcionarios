@@ -1,0 +1,19 @@
+cafeteria_list:
+    path: /
+    methods: [GET]
+    controller: App\Controller\CafeteriaController::indexAction
+
+cafeteria_create:
+    path: /new
+    methods: [GET, POST]
+    controller: App\Controller\CafeteriaController::createAction
+
+cafeteria_update:
+    path: /edit/{id}
+    methods: [GET, PUT]
+    controller: App\Controller\CafeteriaController::updateAction
+
+cafeteria_delete:
+    path: /{id}
+    methods: [DELETE]
+    controller: App\Controller\CafeteriaController::deleteAction

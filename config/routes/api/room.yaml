@@ -1,0 +1,9 @@
+api_room_list:
+    path: /
+    methods: [GET]
+    controller: App\Controller\PeopleController::indexAction
+
+api_room_create:
+    path: /
+    methods: [POST]
+    controller: App\Controller\PeopleController::createAction

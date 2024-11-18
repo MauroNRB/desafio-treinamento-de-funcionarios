@@ -1,0 +1,9 @@
+api_people_list:
+    path: /
+    methods: [GET]
+    controller: App\Controller\PeopleController::indexAction
+
+api_people_create:
+    path: /
+    methods: [POST]
+    controller: App\Controller\PeopleController::createAction

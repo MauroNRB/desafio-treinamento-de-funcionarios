@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% import 'Macros/buttons.html.twig' as buttons %}
+{% from 'Macros/actions.html.twig' import update %}
+
+{% block title %}Atualizar Espaço de Café{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <div class="float-right">
+            {{ buttons.show(path('index'), 'Voltar') }}
+        </div>
+        <br />
+        <div class="form-container">
+            <h1 class="text-center mb-4">Atualizar de Espaço de Café</h1>
+            {{ form_start(form, {'id': entity.id}) }}
+                <input type="hidden" name="_method" value="PUT">
+                {{ form_errors(form) }}
+                {{ form_row(form.name) }}
+                {{ update() }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+

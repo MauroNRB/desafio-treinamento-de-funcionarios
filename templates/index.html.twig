@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4">Bem-vindo ao Sistema de Treinamento de Funcionários</h1>
+            <p class="lead">Gerencie as etapas do treinamento, as salas, os espaços de café e os participantes.</p>
+            <p class="text-muted">Sistema desenvolvido para otimizar o processo de organização de eventos de treinamento.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-custom">
+                    <div class="card-header">
+                        Vincular pessoa ao espaço de café
+                    </div>
+                    <div class="card-body">
+                        <p>Vincular pessoa ao espaço de café, com somente o nome da pessoa.</p>
+                        <a href="{{ path('general_link_people_to_cafeteria') }}" class="btn btn-primary">Vincular</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-custom">
+                    <div class="card-header">
+                        Vincular sala a treinamento
+                    </div>
+                    <div class="card-body">
+                        <p>Vincular sala a treinamento, com uma listagem simples.</p>
+                        <a href="{{ path('general_link_room_to_coaching') }}" class="btn btn-primary">Vincular</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-custom">
+                    <div class="card-header">
+                        Vincular pessoa a treinamento
+                    </div>
+                    <div class="card-body">
+                        <p>Vincular pessoa ao treinamento, com somente o nome da pessoa.</p>
+                        <a href="#" class="btn btn-primary">Vincular</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-custom">
+                    <div class="card-header">
+                        Consultar Pessoa
+                    </div>
+                    <div class="card-body">
+                        <p>Consulte uma pessoa cadastrada.</p>
+                        <a href="#" class="btn btn-secondary">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-custom">
+                    <div class="card-header">
+                        Consultar Sala
+                    </div>
+                    <div class="card-body">
+                        <p>Consulte as pessoas alocadas em uma sala.</p>
+                        <a href="#" class="btn btn-secondary">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-custom">
+                    <div class="card-header">
+                        Consultar Espaços de Café
+                    </div>
+                    <div class="card-body">
+                        <p>Consulte as pessoas em espaços de cafés.</p>
+                        <a href="#" class="btn btn-secondary">Consultar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

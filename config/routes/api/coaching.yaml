@@ -1,0 +1,9 @@
+api_coaching_list:
+    path: /
+    methods: [GET]
+    controller: App\Controller\PeopleController::indexAction
+
+api_coaching_create:
+    path: /
+    methods: [POST]
+    controller: App\Controller\PeopleController::createAction
