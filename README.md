@@ -17,6 +17,3 @@ php bin/console doctrine:schema:update --force
 
 symfony server:start
 ```
-
-teste
-
