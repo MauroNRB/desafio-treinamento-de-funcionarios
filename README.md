@@ -3,8 +3,8 @@
 ## Requisitos:
 - PHP 7.1+ 
 - MySQL: 5.7 
-- Composer 
-- Symfony
+- [Composer](https://getcomposer.org/download/)
+- [Symfony](https://symfony.com/download)
 
 ## Iniciar projeto:
 
