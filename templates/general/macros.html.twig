@@ -120,3 +120,76 @@
         });
     </script>
 {% endmacro %}
+
+
+{% macro javascriptFind(field) %}
+    <script>
+        function list(results, field)
+        {
+            var input = document.getElementById('input-entity');
+            var div = document.getElementById('results-entity');
+
+            function normalizeString(str) {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            }
+
+            function filtrarResultados() {
+                const term = normalizeString(input.value.toLowerCase());
+                const resultsFilter = results.filter(item => normalizeString(item[field].toLowerCase()).includes(term));
+
+                div.innerHTML = '';
+                if (resultsFilter.length > 0) {
+                    insertItems(resultsFilter);
+                } else if (term == '') {
+                    reset();
+                } else {
+                    const divItem = document.createElement('div');
+                    divItem.classList.add('list-group-item', 'text-muted');
+                    divItem.textContent = 'Nenhum resultado encontrado';
+                    div.appendChild(divItem);
+                }
+            }
+
+            function insertItems(resultsFilter) {
+                const table = document.createElement('table');
+                table.classList.add('table', 'table-striped');
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+                const headerRow = document.createElement('tr');
+                Object.keys(resultsFilter[0]).forEach(key => {
+                    const th = document.createElement('th');
+                    th.contentText = key;
+                    headerRow.appendChild(th);
+                });
+
+                thead.appendChild(headerRow);
+
+                resultsFilter.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.setAttribute('style', 'white-space: pre;');
+                    Object.keys(item).forEach(key => {
+                        const td = document.createElement('td');
+                        td.textContent = item[key];
+                        row.appendChild(td);
+                    });
+                    tbody.appendChild(row);
+                });
+
+                table.appendChild(thead);
+                table.appendChild(tbody);
+                div.appendChild(table);
+            }
+
+            function reset() {
+                div.innerHTML = '';
+                const resultsFilter = results.filter(item => normalizeString(item[field].toLowerCase()).includes(''));
+                insertItems(resultsFilter);
+            }
+
+            reset();
+            input.addEventListener('input', filtrarResultados);
+        }
+
+        list(arrEntity, '{{ field }}');
+    </script>
+{% endmacro %}

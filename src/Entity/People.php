@@ -157,6 +157,14 @@ class People extends EntityBase implements PeopleInterface
     {
         $arr = $this->getArrayBaseEntity();
         $arr['cafeteria'] = $this->getCafeteria() instanceof CafeteriaInterface ? $this->getCafeteria()->getArrayBaseEntity() : array();
+        $arrCoachings = array();
+
+        /** @var Coaching $coaching */
+        foreach ($this->getCoachings() as $coaching) {
+            $arrCoachings[] = $coaching->getArrayBaseEntity();
+        }
+
+        $arr['coachings'] = $arrCoachings;
 
         return $arr;
     }

@@ -8,17 +8,22 @@ general_link_room_to_coaching:
     methods: [GET, POST]
     controller: App\Controller\MainController::linkRoomToCoaching
 
-#coaching_create:
-#    path: /new
-#    methods: [GET, POST]
-#    controller: App\Controller\CoachingController::createAction
-#
-#coaching_update:
-#    path: /edit/{id}
-#    methods: [ GET, PUT ]
-#    controller: App\Controller\CoachingController::updateAction
-#
-#coaching_delete:
-#    path: /{id}
-#    methods: [ DELETE ]
-#    controller: App\Controller\CoachingController::deleteAction
+general_link_people_to_coaching:
+    path: /link-people-to-coaching
+    methods: [GET, POST]
+    controller: App\Controller\MainController::linkPeopleToCoaching
+
+general_find_people:
+    path: /find-peoples
+    methods: [GET, POST]
+    controller: App\Controller\MainController::findPeoples
+
+general_find_room:
+    path: /find-rooms
+    methods: [GET, POST]
+    controller: App\Controller\MainController::findRooms
+
+general_find_cafeteria:
+    path: /find-cafeterias
+    methods: [GET, POST]
+    controller: App\Controller\MainController::findCafeterias

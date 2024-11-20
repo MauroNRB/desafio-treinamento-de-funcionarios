@@ -103,6 +103,11 @@ class Coaching extends EntityBase implements CoachingInterface
         return $this;
     }
 
+    public function getName()
+    {
+        return sprintf('Turno %s - %s', $this->getRotation(), $this->getRoom()->getName());
+    }
+
     /**
      * @return array
      */
@@ -111,6 +116,7 @@ class Coaching extends EntityBase implements CoachingInterface
         return array(
             'id' => $this->getId(),
             'rotation' => $this->getRotation(),
+            'name' => $this->getName(),
         );
     }
 

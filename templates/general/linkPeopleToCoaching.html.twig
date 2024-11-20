@@ -4,7 +4,7 @@
 {% import 'Macros/buttons.html.twig' as buttons %}
 {% from 'general/macros.html.twig' import javascriptLink %}
 
-{% block title %}Vincular pessoa ao espaço de café{% endblock %}
+{% block title %}Vincular pessoa ao treinamento{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -39,12 +39,12 @@
 
     <script>
         var arrEntity1 = {{ peoples|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw  }};
-        var arrEntity2 = {{ cafeterias|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw  }};
+        var arrEntity2 = {{ coachings|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw  }};
     </script>
 
     <div class="container">
         <br>
-        <h1>Vincular pessoa ao espaço de café</h1>
+        <h1>Vincular pessoa ao treinamento</h1>
         <div class="float-right">
             {{ buttons.show(path('index'), 'Voltar') }}
         </div>
@@ -57,13 +57,13 @@
                         <div id="results-entity1" class="list-group mt-3"></div>
                     </div>
                     <div class="col-md-6 entitySelect2">
-                        <input type="text" class="form-control" id="input-entity2" placeholder="Filtrar por nome das cafeterias">
+                        <input type="text" class="form-control" id="input-entity2" placeholder="Filtrar por nome dos treinamentos">
                         <div id="results-entity2" class="list-group mt-3"></div>
                     </div>
                 </div>
                 <br>
                 <div class="row">
-                    <form id="link-entities" action="{{ path('general_link_people_to_cafeteria') }}" method="POST">
+                    <form id="link-entities" action="{{ path('general_link_people_to_coaching') }}" method="POST">
                         <div class="form-actions form-row text-center">
                             <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> {{ 'Vincular'|trans }}</button>
                         </div>
@@ -73,5 +73,5 @@
         </div>
     </div>
 
-    {{ javascriptLink('fullName', 'people', 'name', 'cafeteria') }}
+    {{ javascriptLink('fullName', 'people', 'name', 'coaching') }}
 {% endblock %}
